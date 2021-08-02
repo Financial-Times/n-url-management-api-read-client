@@ -8,7 +8,7 @@
     "denodeify": "^1.2.1"
   },
   "devDependencies": {
-    "@financial-times/n-gage": "^3.6.0",
+    "@financial-times/n-gage": "^8.3.2",
     "chai": "^3.5.0",
     "eslint": "^1.10.3",
     "istanbul": "^0.4.2",
@@ -21,12 +21,16 @@
     "snyk": "^1.168.0"
   },
   "scripts": {
-    "precommit": "node_modules/.bin/secret-squirrel",
-    "prepush": "make verify -j3",
-    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg",
     "prepare": "npx snyk protect || npx snyk protect -d || true"
   },
   "engines": {
     "node": "12.x"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node_modules/.bin/secret-squirrel-commitmsg",
+      "pre-commit": "node_modules/.bin/secret-squirrel",
+      "pre-push": "make verify -j3"
+    }
   }
 }
