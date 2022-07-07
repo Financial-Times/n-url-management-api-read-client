@@ -4,7 +4,7 @@
   "main": "main",
   "dependencies": {
     "@financial-times/n-logger": "^8.0.0",
-    "aws-sdk": "^2.2.33",
+    "aws-sdk": "^2.1021.0",
     "denodeify": "^1.2.1"
   },
   "devDependencies": {
