@@ -1,6 +1,6 @@
 {
   "Item": {
-    "FromURL": { "S": "https://www.ft.com/fastft" },
+    "FromURL": { "S": "https://www.ft.com/redirected" },
     "Code": { "N": "100" },
     "ToURL": { "S": "https://www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz" }
   }

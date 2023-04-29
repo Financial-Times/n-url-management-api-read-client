@@ -2,7 +2,7 @@
 
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
-const itemFixture = require('./fixtures/fastft.json');
+const itemFixture = require('./fixtures/redirected.json');
 const metricsMock = require('./utils/metrics-mock');
 const sinon = require('sinon');
 const dynamosInitStub = sinon.stub();

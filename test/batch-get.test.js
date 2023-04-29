@@ -2,7 +2,7 @@
 
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
-const fastFtFixture = require('./fixtures/fastft.json');
+const redirectedFixture = require('./fixtures/redirected.json');
 const justasFastFtFixture = require('./fixtures/justasfastft.json');
 const metricsMock = require('./utils/metrics-mock');
 
@@ -11,7 +11,7 @@ const mockInstance = {
 		cb(null, {
 			Responses: {
 				urlmgmtapi_primary: [
-					fastFtFixture.Item,
+					redirectedFixture.Item,
 					justasFastFtFixture.Item
 				]
 			}
@@ -34,13 +34,13 @@ describe('#batchGet', () => {
 
 	before(() => main.init({ metrics: metricsMock, timeout: 500 }));
 
-	it('should #get /fastft and /justasfastft', () => {
-		return main.batchGet(['https://www.ft.com/fastft', 'https://www.ft.com/justasfastft'])
+	it('should #get /redirected and /justasfastft', () => {
+		return main.batchGet(['https://www.ft.com/redirected', 'https://www.ft.com/justasfastft'])
 			.then(data => {
 				expect(data).to.eql([
 					{
 						code: 100,
-						fromURL: 'https://www.ft.com/fastft',
+						fromURL: 'https://www.ft.com/redirected',
 						toURL: 'https://www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz'
 					},
 					{
@@ -53,12 +53,12 @@ describe('#batchGet', () => {
 	});
 
 	it('should return a vanity-like response if the database doesn\'t contain a url', () => {
-		return main.batchGet(['https://www.ft.com/fastft', 'https://www.ft.com/unknown'])
+		return main.batchGet(['https://www.ft.com/redirected', 'https://www.ft.com/unknown'])
 			.then(data => {
 				expect(data).to.eql([
 					{
 						code: 100,
-						fromURL: 'https://www.ft.com/fastft',
+						fromURL: 'https://www.ft.com/redirected',
 						toURL: 'https://www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz'
 					},
 					{
@@ -71,7 +71,7 @@ describe('#batchGet', () => {
 	});
 
 	it('should reject urls with trailing slashes to the slash-less url', () => {
-		return main.batchGet(['https://www.ft.com/fastft/'])
+		return main.batchGet(['https://www.ft.com/redirected/'])
 			.then(() => {
 				throw new Error('should have thrown');
 			}, err => {

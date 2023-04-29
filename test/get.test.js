@@ -2,20 +2,17 @@
 
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
-const itemFixture = require('./fixtures/fastft.json');
-const encodedUrlFixture = require('./fixtures/encodedUrl.json');
+const itemFixture = require('./fixtures/redirected.json');
 const metricsMock = require('./utils/metrics-mock');
 let called = false;
 
 const mockInstance = {
 	getItem: (opts, cb) => {
 		called = true;
-		if (opts.Key.FromURL.S === 'https://www.ft.com/fastft') {
+		if (opts.Key.FromURL.S === 'https://www.ft.com/redirected') {
 			setTimeout(() => cb(null, itemFixture))
 		} else if (opts.Key.FromURL.S === 'https://www.ft.com/slowft') {
 			setTimeout(() => cb(null, itemFixture), 1000)
-		} else if (opts.Key.FromURL.S === 'https://www.ft.com/fästft') {
-			setTimeout(() => cb(null, encodedUrlFixture))
 		} else {
 			setTimeout(() => cb(null, {}));
 		}
@@ -38,12 +35,12 @@ describe('#get', () => {
 	before(() => main.init({ metrics: metricsMock, timeout: 500 }));
 	afterEach(() => called = false)
 
-	it('should #get /fastft', () => {
-		return main.get('https://www.ft.com/fastft')
+	it('should #get /redirected', () => {
+		return main.get('https://www.ft.com/redirected')
 			.then(data => {
 				expect(data).to.eql({
 					code: 100,
-					fromURL: 'https://www.ft.com/fastft',
+					fromURL: 'https://www.ft.com/redirected',
 					toURL: 'https://www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz'
 				});
 			});
@@ -70,12 +67,12 @@ describe('#get', () => {
 	});
 
 	it('should redirect urls with trailing slashes to the slash-less url', () => {
-		return main.get('https://www.ft.com/fastft/')
+		return main.get('https://www.ft.com/anypath/')
 			.then(data => {
 				expect(data).to.eql({
 					code: 301,
-					fromURL: 'https://www.ft.com/fastft/',
-					toURL: 'https://www.ft.com/fastft'
+					fromURL: 'https://www.ft.com/anypath/',
+					toURL: 'https://www.ft.com/anypath'
 				});
 			});
 	});
