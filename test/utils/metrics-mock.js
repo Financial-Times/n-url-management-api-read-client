@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require('@financial-times/n-logger').default;
+const logger = require('@dotcom-reliability-kit/logger');
 
 exports.count = metric => {
 	logger.info({ event: 'METRICS_COUNT', metric });
