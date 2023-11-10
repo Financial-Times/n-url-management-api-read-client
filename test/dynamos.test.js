@@ -44,4 +44,26 @@ describe('#dynamos', () => {
 		expect(httpOptions.agent instanceof Agent).to.be.true
 	});
 
+	describe('auth', () => {
+		it('should allow passing access key and secret', () => {
+			dynamos.init({
+				auth: {
+					accessKeyId: 'akia-test',
+					secretAccessKey: 'secret-secret'
+				}
+			});
+			expect(dynamos._createDynamoDBInstance.args[0][0].accessKeyId).to.equal('akia-test');
+			expect(dynamos._createDynamoDBInstance.args[0][0].secretAccessKey).to.equal('secret-secret');
+		});
+
+		it('throws an error if you do not pass in the key or secret', () => {
+			expect(function(){
+				dynamos.init({
+					auth: {
+						accessKeyId: 'akia-test'
+					}
+				});
+			}).to.throw('secretAccessKey not set on auth object');
+		});
+	});
 });
