@@ -14,7 +14,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_primary',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(new Error('primary failure')), 150)
+					setTimeout(() => cb(new Error('primary failure')), 150);
 				}
 			}
 		},
@@ -22,7 +22,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_replica',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(new Error('replica failure')), 100)
+					setTimeout(() => cb(new Error('replica failure')), 100);
 				}
 			}
 		}

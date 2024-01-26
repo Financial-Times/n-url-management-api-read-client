@@ -11,11 +11,11 @@ const mockInstance = {
 	getItem: (opts, cb) => {
 		called = true;
 		if (opts.Key.FromURL.S === 'https://www.ft.com/fastft') {
-			setTimeout(() => cb(null, itemFixture))
+			setTimeout(() => cb(null, itemFixture));
 		} else if (opts.Key.FromURL.S === 'https://www.ft.com/slowft') {
-			setTimeout(() => cb(null, itemFixture), 1000)
+			setTimeout(() => cb(null, itemFixture), 1000);
 		} else if (opts.Key.FromURL.S === 'https://www.ft.com/fästft') {
-			setTimeout(() => cb(null, encodedUrlFixture))
+			setTimeout(() => cb(null, encodedUrlFixture));
 		} else {
 			setTimeout(() => cb(null, {}));
 		}
@@ -36,7 +36,7 @@ const main = proxyquire('..', {
 describe('#get', () => {
 
 	before(() => main.init({ metrics: metricsMock, timeout: 500 }));
-	afterEach(() => called = false)
+	afterEach(() => called = false);
 
 	it('should #get /fastft', () => {
 		return main.get('https://www.ft.com/fastft')
@@ -65,7 +65,7 @@ describe('#get', () => {
 			.then(() => {
 				throw new Error('getting a slow vanity should not resolve');
 			}, error => {
-				expect(error.toString()).to.contain('timed out')
+				expect(error.toString()).to.contain('timed out');
 			});
 	});
 
@@ -105,10 +105,10 @@ describe('#get', () => {
 
 	it('should reject if url is malformed', () => {
 		return main.get('https://www.ft.com/%2050%')
-		.then(() => {
-			throw new Error('malformed URL should not resolve');
-		}, error => {
-			expect(error).to.be.an.instanceof(URIError);
-		});
+			.then(() => {
+				throw new Error('malformed URL should not resolve');
+			}, error => {
+				expect(error).to.be.an.instanceof(URIError);
+			});
 	});
 });

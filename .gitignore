@@ -1,4 +1,4 @@
 node_modules
 .editorconfig
-.eslintrc.js
 coverage
+/.toolkitstate
