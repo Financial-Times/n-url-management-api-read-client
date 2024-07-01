@@ -9,4 +9,7 @@ hooks:
   test:ci:
     - Eslint
     - Mocha
-options: {}
+options:
+  '@dotcom-tool-kit/circleci':
+    nodeVersion:
+      - '18.20-browsers'
