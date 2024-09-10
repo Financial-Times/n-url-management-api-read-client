@@ -18,10 +18,10 @@
         "npm-prepublish": "^1.2.1",
         "proxyquire": "^1.7.4",
         "sinon": "^1.17.3",
-        "dotcom-tool-kit": "^3.4.0",
-        "@dotcom-tool-kit/component": "^4.1.0",
-        "@dotcom-tool-kit/mocha": "^3.2.0",
-        "@dotcom-tool-kit/eslint": "^3.2.0",
+        "dotcom-tool-kit": "^4.0.0",
+        "@dotcom-tool-kit/component": "^5.0.0",
+        "@dotcom-tool-kit/mocha": "^4.0.0",
+        "@dotcom-tool-kit/eslint": "^4.0.0",
         "@financial-times/eslint-config-next": "^7.1.0"
     },
     "scripts": {
