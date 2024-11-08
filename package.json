@@ -8,7 +8,7 @@
         "denodeify": "^1.2.1"
     },
     "devDependencies": {
-        "chai": "^3.5.0",
+        "chai": "^5.1.2",
         "check-engine": "^1.14.0",
         "eslint": "^7.32.0",
         "istanbul": "^0.4.2",
