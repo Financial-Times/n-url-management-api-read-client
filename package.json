@@ -4,7 +4,7 @@
     "main": "main",
     "dependencies": {
         "@dotcom-reliability-kit/logger": "^2.2.7",
-        "aws-sdk": "^2.2.33",
+        "aws-sdk": "^2.1692.0",
         "denodeify": "^1.2.1"
     },
     "devDependencies": {
